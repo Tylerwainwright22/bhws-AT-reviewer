@@ -22,3 +22,10 @@ and generates a structured evaluation report for Black Hills Works staff.
 ## Project conventions
 - Commit after each working milestone
 - Plain language in all output -- this may be read by non-technical staff
+
+## Key terminology
+- AT = Assistive Technology (devices/software supporting independence and employment)
+- IDD = Intellectual and Developmental Disabilities
+- BHWS = Black Hills Works (nonprofit IDD services org in Rapid City, SD)
+- CHOICES waiver = South Dakota Medicaid waiver that can fund AT for eligible individuals
+- Vocational context = supported employment, job training, and career development for adults with IDD
