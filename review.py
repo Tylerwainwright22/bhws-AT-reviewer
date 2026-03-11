@@ -54,7 +54,7 @@ def review_product(product_name: str) -> None:
 
     with client.messages.stream(
         model="claude-opus-4-6",
-        max_tokens=2048,
+        max_tokens=4096,
         thinking={"type": "adaptive"},
         system=SYSTEM_PROMPT,
         messages=[
