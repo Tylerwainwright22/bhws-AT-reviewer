@@ -76,17 +76,30 @@ def get_api_key():
 
 def build_report(product_name: str) -> str:
     client = anthropic.Anthropic()
-    response = client.messages.create(
-        model="claude-opus-4-6",
-        max_tokens=1024,
-        system=SYSTEM_PROMPT,
-        messages=[
-            {
-                "role": "user",
-                "content": USER_PROMPT_TEMPLATE.format(product_name=product_name),
-            }
-        ],
-    )
+    try:
+        response = client.messages.create(
+            model="claude-opus-4-6",
+            max_tokens=1024,
+            system=SYSTEM_PROMPT,
+            messages=[
+                {
+                    "role": "user",
+                    "content": USER_PROMPT_TEMPLATE.format(product_name=product_name),
+                }
+            ],
+        )
+    except anthropic.APIConnectionError:
+        print("Could not reach the Anthropic API. Check your network connection.")
+        sys.exit(1)
+    except anthropic.AuthenticationError:
+        print("API key was rejected. Check that ANTHROPIC_API_KEY is correct.")
+        sys.exit(1)
+    except anthropic.RateLimitError:
+        print("Rate limit reached. Wait a moment and try again.")
+        sys.exit(1)
+    except anthropic.APIError as e:
+        print(f"API error: {e}")
+        sys.exit(1)
     return response.content[0].text
 
 
